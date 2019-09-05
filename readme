@@ -1,0 +1,99 @@
+Student ID : 17412844
+Name: Sean Brereton
+
+Description:
+
+    myshell.py is a simple command line shell witten in python3 using the Cmd and OS modules.
+    It supports a number of native commands, I/O redirection and background program execution.
+    The shell can be started with command line input from a batchfile
+
+        > python3 myshell.py batchfile
+    
+    where batchfile contains a set of commands to be executed.
+
+    The shell can also be started without any other command line input by
+
+        > python3 myshell.py
+
+    This takes input from the user via a prompt on the display.
+
+
+Environment Concepts:
+
+    The shell prompt is set to username followed by the current directory e.g
+
+        > user@myshell~/home/user>
+
+    The username is taken from the environment string.
+    The current working directory changes to whatever directory the user is currently in.
+    The shell supports all other built in UNIX commands and functions.
+
+Commands:
+
+    This shell supports the use of the following built-in commands:
+
+    cd
+        Usage: cd <directory>. Changes the current default directory to <directory>. 
+        If no argument is given it reports the current directory
+    clr
+        Clears the terminal screen.
+    dir
+        Usage: dir <directory>. Lists contents of <directory>.
+        Usage: dir <directory> >/>> <filename>. This will either overwrite or append the contents of the directory to the given filename.
+    environ
+        Lists all the environment strings
+        Usage: environ >/>> <filename>. Overwrites or appends environment strings to the given file.
+    echo
+        Usage: echo <comment>. Returns a string of the argument given.
+        Usage: echo <comment> >/>> <filename>. Overwrites or appends given comment to the given file.
+    help
+        Shows usage of a given command.
+        Usage: help. Displays the manual 20 lines at a time until the Enter key is pressed.
+        Usage: help <command>. Prints the help for the specified command
+        Usage: help >/>> <filename>. Overwrites or appends the manual to the given file.
+    pause
+        Pauses the shell untin the "Enter" key is pressed.
+    quit
+        This exits the shell.
+
+    The shell also supports all other UNIX commands e.g cat, ls etc. through the use of subprocesses.
+
+
+I/O Redirection:
+
+    I/O(Input / Output) redirection is supported for a number of commands:
+        
+        >dir
+        >environ
+        >echo
+        >help
+    
+    It is also supported for other command line input where applicable e.g
+
+        >cat x.txt > y.txt
+
+    This will output the contents of x into y.
+    Output redirection has two methods. The first method uses '>'  followed by a file name such as
+
+        > environ > txt.txt
+    
+    This outputs the contents all the environment strings to the given file 'text.txt'.
+    This method deletes any other contents in the given file before outputting the string.
+    If a file name is not given this will not work.
+    
+    The other method uses '>' followed by a file name such as
+
+        > environ >> text.txt
+
+    This appends all the environment strings to the given file without deleting any other contents of the file
+
+
+Background Program Execution:
+
+    Any other UNIX command can be run as a background process by using the '&' symbol e.g
+
+        > firefox &
+    
+    This will run the specified program in the background allowing the user to continue using the shell for other commands.
+    Running as a background process allows the user to continue using the shell.
+    Without running it as a background process the shell is locked until the program finishes execution.
